@@ -1,0 +1,14 @@
+CHIP ZeroNegate16 {
+    IN
+        in[16],
+        z, // zero the input
+        n; // negate the input
+
+    OUT
+        out[16];
+
+    PARTS:
+    Not16(in=in,out=notin);
+    Mux16(a=in,b=notin,sel=n,out=tmp);
+    Mux16(a=tmp,b=false,sel=z,out=out);
+}

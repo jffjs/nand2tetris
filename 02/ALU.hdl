@@ -45,11 +45,11 @@ CHIP ALU {
         ng; // 1 if (out<0),  0 otherwise
 
     PARTS:
-    Not16(in=x,out=notx);
-    Mux16(a=x,b=notx,sel=nx,out=x1);
-    Mux16(a=x1,b=false,sel=zx,out=xfinal);
-
-    Not16(in=y,out=noty);
-    Mux16(a=y,b=noty,sel=ny,out=y1);
-    Mux16(a=y1,b=false,sel=zy,out=yfinal);
+    ZeroNegate16(in=x,z=zx,n=nx,out=xf);
+    ZeroNegate16(in=y,z=zy,n=ny,out=yf);
+    And16(a=xf,b=yf,out=andout);
+    Add16(a=xf,b=yf,out=addout);
+    Mux16(a=andout,b=addout,sel=f,out=tmpout);
+    ZeroNegate16(in=tmpout,z=false,n=no,out=outf);
+    And16(a=outf,b=true,out[15]=ng,out=out);
 }
