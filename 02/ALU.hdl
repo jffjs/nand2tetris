@@ -52,4 +52,6 @@ CHIP ALU {
     Mux16(a=andout,b=addout,sel=f,out=tmpout);
     ZeroNegate16(in=tmpout,z=false,n=no,out=outf);
     And16(a=outf,b=true,out[15]=ng,out=out);
+    Or16Way(in=outf,out=notzr);
+    Not(in=notzr,out=zr);
 }
