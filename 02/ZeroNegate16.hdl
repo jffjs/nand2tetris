@@ -8,7 +8,7 @@ CHIP ZeroNegate16 {
         out[16];
 
     PARTS:
-    Not16(in=in,out=notin);
-    Mux16(a=in,b=notin,sel=n,out=tmp);
-    Mux16(a=tmp,b=false,sel=z,out=out);
+    Mux16(a=in,b=false,sel=z,out=tmp);
+    Not16(in=tmp,out=notin);
+    Mux16(a=tmp,b=notin,sel=n,out=out);
 }
